@@ -42,7 +42,7 @@ public class CurrencyCode implements Serializable {
     @NotNull
     @Column(name = "Date")
     @Temporal(TemporalType.DATE)
-    private Date date;
+    private String date;
     @Id
     @Basic(optional = false)
     @NotNull
@@ -61,7 +61,7 @@ public class CurrencyCode implements Serializable {
         this.dailyratesCode = dailyratesCode;
     }
 
-    public CurrencyCode(String dailyratesCode, double value, Date date) {
+    public CurrencyCode(String dailyratesCode, double value, String date) {
         this.dailyratesCode = dailyratesCode;
         this.value = value;
         this.date = date;
@@ -75,11 +75,11 @@ public class CurrencyCode implements Serializable {
         this.value = value;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
