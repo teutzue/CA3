@@ -97,9 +97,17 @@ angular.module('myApp.security', [])
     return {
       request: function (config) {
         config.headers = config.headers || {};
-        if ($window.sessionStorage.token) {
-          config.headers.Authorization = 'Bearer ' + $window.sessionStorage.token;
-        }
+       var isCrossOrigin = config.url.toLowerCase().indexOf('http') === 0;
+
+ if (!isCrossOrigin) {
+
+   if ($window.sessionStorage.token) {
+
+      config.headers.Authorization = 'Bearer ' + $window.sessionStorage.token;
+
+   }
+
+ }
         $rootScope.error = "";
         return config;
       },
