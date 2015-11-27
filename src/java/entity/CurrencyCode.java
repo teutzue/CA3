@@ -2,20 +2,18 @@
 package entity;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -25,84 +23,76 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author CosticaTeodor
  */
 @Entity
-@Table(name = "currency_code")
+@Table(name = "dailyrates")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "CurrencyCode.findAll", query = "SELECT c FROM CurrencyCode c"),
-    @NamedQuery(name = "CurrencyCode.findByValue", query = "SELECT c FROM CurrencyCode c WHERE c.value = :value"),
-    @NamedQuery(name = "CurrencyCode.findByDate", query = "SELECT c FROM CurrencyCode c WHERE c.date = :date"),
-    @NamedQuery(name = "CurrencyCode.findByDailyratesCode", query = "SELECT c FROM CurrencyCode c WHERE c.dailyratesCode = :dailyratesCode")})
+    @NamedQuery(name = "Dailyrates.findAll", query = "SELECT d FROM CurrencyCode d"),
+    @NamedQuery(name = "Dailyrates.findByCode", query = "SELECT d FROM CurrencyCode d WHERE d.code = :code"),
+    @NamedQuery(name = "Dailyrates.findByDescription", query = "SELECT d FROM CurrencyCode d WHERE d.description = :description")})
 public class CurrencyCode implements Serializable {
     private static final long serialVersionUID = 1L;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "Value")
-    private double value;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "Date")
-    @Temporal(TemporalType.DATE)
-    private String date;
     @Id
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 6)
-    @Column(name = "dailyrates_Code")
-    private String dailyratesCode;
-    @ManyToOne
-    @PrimaryKeyJoinColumn
-    private Dailyrates dailyrates;
+    @Column(name = "Code")
+    private String code;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
+    @Column(name = "Description")
+    private String description;
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "dailyrates")
+    private List<DailyRate> currencyCodes;
     
+    public void addCurrencyCode(DailyRate cc){
+        if (currencyCodes == null) {
+            currencyCodes = new ArrayList<>();
+        }
+        currencyCodes.add(cc);
+        cc.setDailyrates(this);
+    }
 
     public CurrencyCode() {
     }
 
-    public CurrencyCode(String dailyratesCode) {
-        this.dailyratesCode = dailyratesCode;
+    public CurrencyCode(String code) {
+        this.code = code;
     }
 
-    public CurrencyCode(String dailyratesCode, double value, String date) {
-        this.dailyratesCode = dailyratesCode;
-        this.value = value;
-        this.date = date;
+    public CurrencyCode(String code, String description) {
+        this.code = code;
+        this.description = description;
     }
 
-    public double getValue() {
-        return value;
+    public String getCode() {
+        return code;
     }
 
-    public void setValue(double value) {
-        this.value = value;
+    public void setCode(String code) {
+        this.code = code;
     }
 
-    public String getDate() {
-        return date;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public String getDailyratesCode() {
-        return dailyratesCode;
+    public List<DailyRate> getCurrencyCode() {
+        return currencyCodes;
     }
 
-    public void setDailyratesCode(String dailyratesCode) {
-        this.dailyratesCode = dailyratesCode;
-    }
-
-    public Dailyrates getDailyrates() {
-        return dailyrates;
-    }
-
-    public void setDailyrates(Dailyrates dailyrates) {
-        this.dailyrates = dailyrates;
+    public void setCurrencyCode(List<DailyRate> currencyCode) {
+        this.currencyCodes = currencyCode;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (dailyratesCode != null ? dailyratesCode.hashCode() : 0);
+        hash += (code != null ? code.hashCode() : 0);
         return hash;
     }
 
@@ -113,7 +103,7 @@ public class CurrencyCode implements Serializable {
             return false;
         }
         CurrencyCode other = (CurrencyCode) object;
-        if ((this.dailyratesCode == null && other.dailyratesCode != null) || (this.dailyratesCode != null && !this.dailyratesCode.equals(other.dailyratesCode))) {
+        if ((this.code == null && other.code != null) || (this.code != null && !this.code.equals(other.code))) {
             return false;
         }
         return true;
@@ -121,7 +111,7 @@ public class CurrencyCode implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.CurrencyCode[ dailyratesCode=" + dailyratesCode + " ]";
+        return "entity.Dailyrates[ code=" + code + " ]";
     }
 
 }

@@ -1,5 +1,6 @@
-package deploy;
+package XmlProcessor;
 
+import XmlProcessor.XmlReaderDemo;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -19,7 +20,7 @@ public class Timer implements ServletContextListener{
     @Override
     public void contextInitialized(ServletContextEvent event) {
         scheduler = Executors.newSingleThreadScheduledExecutor();
-        scheduler.scheduleAtFixedRate(new XmlReaderDemo(), 0, 1, TimeUnit.DAYS);
+       // scheduler.scheduleAtFixedRate(new XmlReaderDemo(), 0, 15, TimeUnit.SECONDS);
     }
 
     @Override
