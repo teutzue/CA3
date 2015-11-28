@@ -1,5 +1,36 @@
-<h3>This is the partial for view 5 all users.</h3>
+
+<label>Search
+    <input type="search" ng-model="userFilter" placeholder="Filter">
+</label>
+
 <div>
-    <p>Data from server (Admins only) <b style="color: darkblue">{{data.message}}</b></p>
-    <p>Server Time: <b style="color: darkblue">{{data.serverTime}}</b></p>
-</div>
+    <div class="col-md-9">
+        <table class="table">
+            <thead >
+                <tr>
+                    <td>ID</td>
+                    <td><a href="">User Name</a></td>
+                    <td><a href="">Role</a></td>
+                    <td><a href="">Password</a></td>
+                    <td><a>Action</a></td>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr  ng-repeat="user in users| filter: userFilter">
+                    <td>{{$index + 1}}</td>
+                    <td>{{user.username}}</td>
+                    <td>{{user.role}}</td>
+                    <td>{{user.password}}</td>
+
+                    <td>
+                        <a href="" ng-click="delete(user.username)">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <button class="btn btn-success" ng-click="getUsers()">
+            <span class="glyphicon glyphicon-save"></span>  Get Users
+        </button>
+    </div>
