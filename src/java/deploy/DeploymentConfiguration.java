@@ -32,8 +32,9 @@ public class DeploymentConfiguration implements ServletContextListener {
     }
     try {
       ServletContext context = sce.getServletContext();
-      EntityManagerFactory emf = Persistence.createEntityManagerFactory(DeploymentConfiguration.PU_NAME);
-      EntityManager em = emf.createEntityManager();
+//      EntityManagerFactory emf = Persistence.createEntityManagerFactory(DeploymentConfiguration.PU_NAME);
+//      EntityManager em = emf.createEntityManager();
+      EntityManager em = databaseUtil.DBConnector.getInstance().getEmFactory().createEntityManager();
       
       //This flag is set in Web.xml -- Make sure to disable for a REAL system
       boolean makeTestUsers = context.getInitParameter("makeTestUsers").toLowerCase().equals("true");
