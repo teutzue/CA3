@@ -33,7 +33,7 @@ import javax.ws.rs.core.MediaType;
 @Path("allusers")
 public class AllUsers {
 
-    private static final UserFacade facade = new UserFacade();
+    private final UserFacade facade = new UserFacade();
     private static Gson gson = new GsonBuilder().setPrettyPrinting().setFieldNamingPolicy(FieldNamingPolicy.IDENTITY).create();
 
     @Context
@@ -52,7 +52,7 @@ public class AllUsers {
 
         user.setUserName(joUser.get("username").getAsString());
         user.setPassword(joUser.get("password").getAsString());
-
+        
         user = facade.addUser(user, "User");
 
         JsonObject feetback = new JsonObject();
