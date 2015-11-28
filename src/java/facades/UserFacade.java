@@ -18,7 +18,7 @@ public class UserFacade {
     EntityManagerFactory emf = Persistence.createEntityManagerFactory(DeploymentConfiguration.PU_NAME);
 
     public UserFacade() {}
-    
+     
     public User addUser(entity.User user, String sRole) {
 
         try {
