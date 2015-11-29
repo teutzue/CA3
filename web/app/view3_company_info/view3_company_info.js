@@ -17,6 +17,16 @@ angular.module('myApp.view3_company_info', ['ngRoute', 'ngAnimate', 'ui.bootstra
             $scope.productionunits = [];
             $scope.myvalue = false;
             $scope.property = {};
+            
+             $http({
+            method: 'GET',
+            url: 'api/demouser'
+        }).then(function successCallback(res) {
+            $scope.data = res.data.message;
+        }, function errorCallback(res) {
+            $scope.error = res.status + ": " + res.data.statusText;
+        });
+            
 
             $scope.findCompany = function ()
             {
@@ -44,13 +54,6 @@ angular.module('myApp.view3_company_info', ['ngRoute', 'ngAnimate', 'ui.bootstra
             };
 
         });
-//        $http({
-//            method: 'GET',
-//            url: 'api/demouser'
-//        }).then(function successCallback(res) {
-//            $scope.data = res.data.message;
-//        }, function errorCallback(res) {
-//            $scope.error = res.status + ": " + res.data.statusText;
-//        });
+       
 
 
