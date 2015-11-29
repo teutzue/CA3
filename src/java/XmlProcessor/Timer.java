@@ -19,8 +19,12 @@ public class Timer implements ServletContextListener{
 
     @Override
     public void contextInitialized(ServletContextEvent event) {
+        
+        XmlReaderDemo xmlReaderDemo = new XmlReaderDemo();
         scheduler = Executors.newSingleThreadScheduledExecutor();
-       // scheduler.scheduleAtFixedRate(new XmlReaderDemo(), 0, 15, TimeUnit.SECONDS);
+//        scheduler.scheduleAtFixedRate(xmlReaderDemo, 60, 15, TimeUnit.SECONDS);
+        scheduler.scheduleWithFixedDelay(xmlReaderDemo, 60, 15, TimeUnit.DAYS);
+        xmlReaderDemo.run();
     }
 
     @Override

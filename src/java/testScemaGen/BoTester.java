@@ -5,12 +5,20 @@
  */
 package testScemaGen;
 
+import com.google.gson.FieldNamingPolicy;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import deploy.DeploymentConfiguration;
+import entity.DailyRate;
 import entity.User;
 import facades.AdminFacade;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import rest.util.JsonConverter;
 
 /**
@@ -21,7 +29,29 @@ public class BoTester {
     
     private static final AdminFacade af = AdminFacade.getInstance();
     
-    public static void main(String[] args) {
+    private static Gson gson = new GsonBuilder().setPrettyPrinting().setFieldNamingPolicy(FieldNamingPolicy.IDENTITY).create();
+    private static EntityManagerFactory emf =  Persistence.createEntityManagerFactory(DeploymentConfiguration.PU_NAME);
+    
+    
+    
+    
+    public static void DailyRates() {
+        
+//        EntityManager em = emf.createEntityManager();
+//        
+//        List<DailyRate> dailyrates = em.createQuery("select t.id,t.rate,t.currencycode from DailyRate t", DailyRate.class).getResultList();
+//        
+//        
+//        System.out.println( gson.toJson(dailyrates) );
+        
+        
+        
+    } // End of method
+    
+    
+    public static void test() {
+        
+        
         
 //        List<entity.User> users = new ArrayList<>( af.getAllUsers() );
 //        
@@ -33,15 +63,15 @@ public class BoTester {
 //            System.out.println(JsonConverter.user2Json(user));
 //        }
         
-        List<entity.User> users = new ArrayList<>(af.getAllUsers());
-
-        String jUsers = "";
-        for (entity.User user : users) {
-
-            jUsers += JsonConverter.user2JsonObj(user);
-        }
-        
-        System.out.println(jUsers);
+//        List<entity.User> users = new ArrayList<>(af.getAllUsers());
+//
+//        String jUsers = "";
+//        for (entity.User user : users) {
+//
+//            jUsers += JsonConverter.user2JsonObj(user);
+//        }
+//        
+//        System.out.println(jUsers);
         
         
         
@@ -57,6 +87,16 @@ public class BoTester {
 //        ja.add(joUser);
 //        
 //        System.out.println(ja.toString());
+        
+    } // End of method
+    
+    
+    
+    
+    public static void main(String[] args) {
+        
+        DailyRates();
+       
         
     } // End of main
     
