@@ -58,8 +58,13 @@ public class DailyRate implements Serializable {
     }
     public DailyRate() {
     }
-    
-    
-    
+
+    public CurrencyCode getCurrencycode() {
+        return currencycode;
+    }
+
+    public void setCurrencycode(CurrencyCode currencycode) {
+        this.currencycode = currencycode;
+    }
     
 }

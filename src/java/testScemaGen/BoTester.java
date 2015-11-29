@@ -38,7 +38,7 @@ public class BoTester {
         String jUsers = "";
         for (entity.User user : users) {
 
-            jUsers += JsonConverter.user2Json(user);
+            jUsers += JsonConverter.user2JsonObj(user);
         }
         
         System.out.println(jUsers);

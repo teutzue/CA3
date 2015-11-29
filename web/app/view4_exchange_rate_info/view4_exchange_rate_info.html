@@ -1,4 +1,24 @@
-<p>This is the partial for view 4 exchange rate info</p>
-<div>
-    <p>Data from server (Users ONLY) <b style="color: darkblue">{{data}}</b></p>
+<div ng-controller="view4_exchange_rate_infoCtrl">
+   <h1>Exchange info</h1>
+
+    <table class="table">
+        <thead>
+            <tr >
+                <th>Date: </th>
+                <th>Code: </th>
+                <th>Description: </th>
+                <th>Rate: </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="c in currency">
+                <td>{{c.date}}</td>
+                <td>{{c.currencyCode}}</td>
+                <td>{{c.description}}</td>
+                <td>{{c.rate}}</td>
+            </tr>
+           
+        </tbody>
+    </table>
+
 </div>

@@ -8,7 +8,14 @@ package rest.util;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import deploy.DeploymentConfiguration;
+import entity.DailyRate;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.Persistence;
+import net.minidev.json.JSONArray;
 
 /**
  *
@@ -30,9 +37,33 @@ public class JsonConverter {
         return joUser;
     } // End of method
     
-    public static String user2Json(entity.User user) {
+    public static String DailyRAteJsonObj() {
         
-        return user2JsonObj(user).toString();
-    }
+        Gson gson = new GsonBuilder().setPrettyPrinting().setFieldNamingPolicy(FieldNamingPolicy.IDENTITY).create();
+        EntityManager em = Persistence.createEntityManagerFactory(DeploymentConfiguration.PU_NAME).createEntityManager();
+        List<DailyRate> dailyrates = em.createQuery("select t from DailyRate t", DailyRate.class).getResultList();
+        
+        JsonArray jsonArray = new JsonArray();
+        for (DailyRate p : dailyrates) 
+        {
+           JsonObject json = new JsonObject();
+           
+          json.addProperty("date", p.getDate().toString());
+          json.addProperty("rate", p.getRate());
+          
+          if(p.getCurrencycode()!=null )
+          {
+              
+          
+          json.addProperty("currencyCode", p.getCurrencycode().getCode());
+          json.addProperty("description", p.getCurrencycode().getDescription());
+
+          }
+          jsonArray.add(json);
+        }
+        
+        return gson.toJson(jsonArray);
+    } // End of method
     
+   
 } // End of class
