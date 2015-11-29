@@ -31,7 +31,8 @@ public class User {
 
         Gson gson = new GsonBuilder().setPrettyPrinting().setFieldNamingPolicy(FieldNamingPolicy.IDENTITY).create();
         EntityManager em = Persistence.createEntityManagerFactory(DeploymentConfiguration.PU_NAME).createEntityManager();
-        List<DailyRate> dailyrates = em.createQuery("select t.id,t.rate,t.currencycode from DailyRate t", DailyRate.class).getResultList();
+        List<DailyRate> dailyrates = em.createQuery("select t.id,t.rate,t.currencycode from DailyRate t").getResultList();
+//        List<DailyRate> dailyrates = em.createQuery("select t.id,t.rate,t.currencycode from DailyRate t", DailyRate.class).getResultList();
         return gson.toJson(dailyrates);
     }
     
