@@ -41,7 +41,8 @@ public class JsonConverter {
         
         Gson gson = new GsonBuilder().setPrettyPrinting().setFieldNamingPolicy(FieldNamingPolicy.IDENTITY).create();
         EntityManager em = Persistence.createEntityManagerFactory(DeploymentConfiguration.PU_NAME).createEntityManager();
-        List<DailyRate> dailyrates = em.createQuery("select t from DailyRate t", DailyRate.class).getResultList();
+        List<DailyRate> dailyrates = em.createQuery("select t from DailyRate t").getResultList();
+//        List<DailyRate> dailyrates = em.createQuery("select t from DailyRate t", DailyRate.class).getResultList();
         
         JsonArray jsonArray = new JsonArray();
         for (DailyRate p : dailyrates) 

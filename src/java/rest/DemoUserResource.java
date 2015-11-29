@@ -12,6 +12,7 @@ import deploy.DeploymentConfiguration;
 import entity.DailyRate;
 import java.util.Date;
 import java.util.List;
+import javax.annotation.security.RolesAllowed;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import javax.ws.rs.core.Context;
@@ -31,6 +32,7 @@ import rest.util.JsonConverter;
  * @author CosticaTeodor
  */
 @Path("demoUser")
+@RolesAllowed("User")
 public class DemoUserResource {
 
     @Context
