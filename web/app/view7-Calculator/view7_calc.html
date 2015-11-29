@@ -1,0 +1,26 @@
+<div ng-controller="calculator">
+    <div >
+
+        Amount: <fieldset class="form-group">
+            <input   type="number" class="form-control" id="amount"  />
+        </fieldset>
+
+        From: <fieldset class="form-group">
+            <input    type="text" class="form-control" id="from"  />
+        </fieldset>
+
+        To: <fieldset class="form-group">
+            <input   type="text" class="form-control" id="to"  />
+        </fieldset>
+
+        <input type="button" value="Calculate" ng-click="getData();
+                            showAlert()" class="btn btn-primary" />
+
+
+
+    </div>
+
+    <div ng-show="myvalue">
+        The result is : {{number}}
+    </div>
+</div>

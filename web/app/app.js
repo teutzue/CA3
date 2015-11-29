@@ -12,7 +12,7 @@ angular.module('myApp', [
   'myApp.view4_exchange_rate_info',
   'myApp.view5_all_users',
   'myApp.view6_create_new_account',
-//  'myApp.view4',
+  'myApp.view7_calc',
   'myApp.filters',
   'myApp.directives',
   'myApp.factories',
