@@ -11,24 +11,57 @@ angular.module('myApp.view7_calc', ['ngRoute'])
 
         .controller('calculator', function ($http, $scope) {
 
-            $scope.number = {};
-            
+
+            $http({
+                method: 'GET',
+                url: 'api/demoUser/cur'
+            }).then(function successCallback(response) {
+                $scope.data.countrycodes = response.data;
+                $scope.data1.countrycodes1 = response.data;
+            }, function errorCallback(response) {
+                $scope.error = res.status + ": " + res.data.statusText;
+            });
+
+
+
+
+
+            $scope.data = {
+                repeatSelect: null,
+                countrycodes: []
+            };
+
+//            $scope.data.countrycodes = [
+//                {code: "USD", description: "US dollars"},
+//                {code: "EUR", description: "Euro"},
+//                {code: "GBP", description: "Pounds sterling"}
+//            ];
+
+
+            $scope.data1 = {
+                repeatSelect1: null,
+                countrycodes1: []
+            };
+
+//            $scope.data1.countrycodes1 = [
+//                {code: "USD", description: "US dollars"},
+//                {code: "EUR", description: "Euro"},
+//                {code: "GBP", description: "Pounds sterling"}
+//            ];
+
+            $scope.number = "";
             $scope.myvalue = false;
-            
+
 
             $scope.getData = function ()
             {
                 $http({
                     method: 'GET',
-                    url: 'api/demoUser/currency/calculator/' + Number($('#amount').val()) + '/' + $('#from').val() + '/' + $('#to').val()
+                    url: 'api/demoUser/currency/calculator/' + $scope.amount + '/' + $scope.data.repeatSelect + '/' + $scope.data1.repeatSelect1
+//                    url: 'api/demoUser/currency/calculator/' + Number($('#amount').val()) + '/' + $('#from').val() + '/' + $('#to').val()
 
                 }).then(function successCallback(response) {
                     $scope.number = response.data;
-
-//                    console.log($scope.response);
-                    console.log($scope.number);
-
-
 
                 }, function errorCallback(response) {
                     alert("Error occured");
@@ -40,14 +73,4 @@ angular.module('myApp.view7_calc', ['ngRoute'])
                 $scope.myvalue = true;
             };
 
-        });
-//        $http({
-//            method: 'GET',
-//            url: 'api/demouser'
-//        }).then(function successCallback(res) {
-//            $scope.data = res.data.message;
-//        }, function errorCallback(res) {
-//            $scope.error = res.status + ": " + res.data.statusText;
-//        });
-
-
+        }); // End of controller

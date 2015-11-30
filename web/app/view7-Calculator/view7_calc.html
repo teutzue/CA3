@@ -1,5 +1,5 @@
-<div ng-controller="calculator">
-    <div >
+<!--<div ng-controller="calculator">-->
+<!--    <div >
 
         Amount: <fieldset class="form-group">
             <input   type="number" class="form-control" id="amount"  />
@@ -18,9 +18,44 @@
 
 
 
-    </div>
+    </div>-->
 
-    <div ng-show="myvalue">
+<!--    <div ng-show="myvalue">
         The result is : {{number}}
-    </div>
-</div>
+    </div>-->
+
+
+    <fieldset class="form-group">Calculate Daily Exchange Rates<br /><br />
+        <label>Amount:
+            <input type="number" ng-model="amount" id="amount" class="form-control" placeholder="number">
+        </label>
+        <label>From:
+            <select class="form-control" name="repeatSelect" id="repeatSelect" ng-model="data.repeatSelect">
+                <option value="" disabled selected hidden>Please Choose</option>
+                <option ng-repeat="countrycode in data.countrycodes" id="from" value="{{countrycode.currencyCode}}">{{countrycode.description}}</option>
+                <!--<option ng-repeat="countrycode in data.countrycodes" id="from" value="{{countrycode.code}}">{{countrycode.description}}</option>-->
+                <!--<option ng-repeat="countrycode in countrycodes" id="from" value="{{countrycode.codd}}">{{countrycode.description}}</option>-->
+                
+            </select>
+        </label>
+        <label>To:
+            <select class="form-control" name="repeatSelect1" id="repeatSelect1" ng-model="data1.repeatSelect1">
+                <option value="" disabled selected hidden>Please Choose</option>
+                <option ng-repeat="countrycode1 in data1.countrycodes1" id="to" value="{{countrycode1.currencyCode}}">{{countrycode1.description}}</option>
+                <!--<option ng-repeat="countrycode1 in data1.countrycodes1" id="to" value="{{countrycode1.code}}">{{countrycode1.description}}</option>-->
+                <!--<option ng-repeat="countrycode in countrycodes" id="to" value="{{countrycode.codd}}">{{countrycode.description}}</option>-->
+            </select>
+        </label>
+        <label>Result:
+            <!-- output class="form-control"></output -->
+            <input type="text" class="form-control" value="{{number}}" placeholder="number">
+        </label>
+    </fieldset>
+    <button class="btn btn-success" ng-click="getData()()">
+        <span class="glyphicon  glyphicon-cog"></span>  Calculate
+    </button>
+<!--</div>  end -->
+
+
+
+
